@@ -1,25 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import styled from '@emotion/styled/macro'
+import type { AppProps } from 'next/app'
 
-export default function Home() {
+// Module Imports
+
+import Homepage from './homepage'
+
+// REDUX imports
+import { store } from '../store/store'
+import { Provider } from 'react-redux'
+
+export default function Home({ Component, pageProps }: AppProps) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="title">
-        Controller
-      </h1>
-
-      <p>
-      To the controller page follow <span className="tomato"><Link href="/controller">this link!</Link></span>
-      </p>
-
-      <h1 className="title">
-        Display
-      </h1>
-
-      <p>
-      To the student display page follow <span className="tomato"><Link href="/display">this link!</Link></span>
-      </p>
-    </main>
+      <Homepage {...pageProps} />
   )
 }
