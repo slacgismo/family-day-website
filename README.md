@@ -1,5 +1,7 @@
 # family-day-website
 
+Repo status: [![Test-build](https://github.com/slacgismo/family-day-website/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/slacgismo/family-day-website/actions/workflows/test.yml)
+
 To run locally, follow the steps below:
 
 ~~~
