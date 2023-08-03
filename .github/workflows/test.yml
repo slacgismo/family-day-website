@@ -25,16 +25,20 @@ jobs:
                 ${{ runner.os }}-
 
           - name: Install Dependencies
+            working-directory: ./family-day
             run: npm install
 
           - name: Build
+            working-directory: ./family-day
             run: |
                 npm run build
 
           - name: Test
+            working-directory: ./family-day
             run: |
                 npm run test:ci
 
           - name: Lint
+            working-directory: ./family-day
             run: |
                 npm run lint
