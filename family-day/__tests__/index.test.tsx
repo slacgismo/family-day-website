@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Homepage from '@/app/homepage'
+import Home from '@/app/page'
 import { ReduxProvider } from '@/app/modules/provider';
 import * as nextRouter from 'next/router';
 
-describe('Homepage', () => {
+describe('Home', () => {
     it('renders the Controller heading', () => {
       render(
         <ReduxProvider>
-            <Homepage />
+            <Home />
         </ReduxProvider> 
     )
   
