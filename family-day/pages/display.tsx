@@ -9,7 +9,7 @@ The Display page is intended to be a dynamically generated, simple viewing page.
 export default function Display() {
     return (
       <div>
-        Controller
+        Display
       </div>
     )
   }

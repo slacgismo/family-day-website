@@ -19,11 +19,19 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { AppDispatch, useAppSelector } from '@/store/store'
 import { useSelector } from 'react-redux'
+import ControllerGenerator from '@/app/modules/controller/generator'
+import ControllerLoad from '@/app/modules/controller/load'
+import ControllerStorage from '@/app/modules/controller/storage'
 
 export default function Controller() {
     return (
       <div>
-        Controller
+        <h1> GENERATOR RAAAAH!</h1>
+          <ControllerGenerator />
+        <h1> LOAD RAAAAH!</h1>
+          <ControllerLoad />
+        <h1> STORAGE RAAAAH!</h1>
+          <ControllerStorage />
       </div>
     )
   }
