@@ -40,7 +40,7 @@ export default function Controller() {
 
   // one of the select types will include an "other" option. If other is selected,
   // then I will render a text field for the custom text. 
-    const Creator = (active) => {
+    const Creator = (obj: {active: boolean}) => {
       return (
         <div className='creator'>
           <select className='deviceTypes' />
@@ -54,7 +54,7 @@ export default function Controller() {
 
     return (
       <div>
-        <Creator />
+        <Creator active={active} />
         <h1> GENERATOR RAAAAH!</h1>
           <ControllerGenerator />
         <h1> LOAD RAAAAH!</h1>
