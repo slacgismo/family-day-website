@@ -8,6 +8,8 @@ import { useState } from 'react'
 import { AppDispatch, useAppSelector } from '@/store/store'
 import { useSelector } from 'react-redux'
 
+// *********** END OF IMPORTS ***********
+
 export default function Homepage() {
     const [exampleInput, setExampleInput] = useState(0)
     const exampleCounter = useAppSelector((state) => state.counter.value)

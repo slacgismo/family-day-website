@@ -10,6 +10,8 @@ import configUtils from '@/utils/config'
 import Switch from '@mui/material/Switch'
 // configutils.ipconfig(ip-address-here)
 // configutils.powerswitch(boolean)
+import configutils from '@/utils/config'
+
 
 
 export default function ControllerGenerator (props) {

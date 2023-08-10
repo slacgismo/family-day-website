@@ -24,7 +24,40 @@ The "modules" directory contains the building-block modules I use for different 
 
 The ```@/src``` directory contains the "reducers" directory, for all the redux state-management functions. The "store", which manages the reducers, and "utils", which contains all general functions, are also included here.
 
-The ```@/pages``` directory contains the additional pages that can be routed to. Adding folders and subfiles inside this directory appends them as new route options automagically.
+The ```@/pages``` directory is unused. While still compatible, in order to manage layouts and styling in nextjs-13,it is better to add a subfolder with a page.tsx(```route_name/page.tsx```) file to add a new route. 
+
+For custom layouts, wrap the folder name ```(folder_name)```. Add your ```folder_name.module.css``` and ```layout.tsx ``` at this level. Add a subfolder ```(folder_name)/route_name/page.tsx``` to add the route and the page. 
+
+To adjust the background or other global settings from the ```globals.css``` file in the app root, you will need to include the following style block in your ```layout.tsx``` return statement. You will also need the "use client" statement on the first line of your ```layout.tsx```
+
+~~~
+"use client"
+
+import styles from "./controller.module.css"
+
+export default function ControllerLayout({
+  children, // will be a page or nested layout
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <section className={styles.backdrop}>
+      {/* Include shared UI here e.g. a header or sidebar */}
+      <style jsx global>
+        {`
+            body {
+                background: beige;
+                color: black;
+            }
+        `}
+      </style>
+      <nav></nav>
+ 
+      {children}
+    </section>
+  )
+}
+~~~
 
 ## testing
 
