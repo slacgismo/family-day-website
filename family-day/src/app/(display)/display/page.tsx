@@ -1,6 +1,6 @@
 "use client"
 
-import styles from '@/styles/display.module.css'
+import styles from '../display.module.css'
 
 /*
 
