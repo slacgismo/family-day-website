@@ -8,13 +8,18 @@ The Display page is intended to be a dynamically generated, simple viewing page.
 
 */
 
+import DisplayGenerator from '@/app/modules/display/generator'
+import DisplayLoad from '@/app/modules/display/load'
+import DisplayStorage from '@/app/modules/display/storage'
 
 // *********** END OF IMPORTS ***********
 
 export default function Display() {
     return (
-      <div>
-        Display
+      <div className={styles.backdrop}>
+        <DisplayGenerator />
+        <DisplayLoad />
+        <DisplayStorage />
       </div>
     )
   }

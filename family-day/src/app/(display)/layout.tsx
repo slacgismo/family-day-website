@@ -13,7 +13,7 @@ export default function DisplayLayout({
       <style jsx global>
         {`
             body {
-                background: black;
+                background: grey;
                 color: white;
             }
         `}

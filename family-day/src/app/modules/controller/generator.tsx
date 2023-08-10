@@ -29,25 +29,6 @@ export default function ControllerGenerator (props) {
     	volts: 0
     })
 
-    // constructor() {
-	// 	super();
-	// 	this.state = {
-	// 	};
-	// 	this.onInputchange = this.onInputchange.bind(this);
-	// }
-
-	// onInputChange(event) {
-	// 	this.setState({
-	// 		[event.target.name]: event.target.value
-	// 	});
-	// }
-// Then, needs an updater function with periodic refreshing
-
-    // let powerValues: { amps: number, watts: number, volts: number} = {
-    // 	amps: 0,
-    // 	watts: 0,
-    // 	volts: 0
-    // }
     return(
         <div id = "xyz" 
         style = {{width : 200, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #32CD32"}}>
@@ -67,31 +48,3 @@ export default function ControllerGenerator (props) {
         </div>
     )
 }
-
-// "use client"
-
-// import { removeDevice } from '@/reducers/deviceList'
-// import { useDispatch } from 'react-redux'
-// import { useState } from 'react'
-// import { AppDispatch, useAppSelector } from '@/store/store'
-// import { useSelector } from 'react-redux'
-
-// export default function ControllerGenerator () {
-//     return(
-//         <div>
-//             Your generator controller code goes in this page!!!
-//             <label>
-//             Watts:
-//             <input
-//             name="watts"
-//             type = "text"
-//             value= "16"
-//             />
-//             </label>
-// {/*            <NumericInput
-//             	className = "generator"
-//             	// value ={600}
-//             />*/}
-//         </div>
-//     )
-// }

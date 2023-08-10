@@ -23,3 +23,34 @@ This is the CSS for the controller page and sub modules rendered within that top
     border-left: 0;
     border-right: 0;
   }
+
+  .creator {
+    padding: 10px;
+    display: flex;
+    margin: auto;
+  }
+
+  .deviceTypes {
+    padding: 10px;
+    margin: auto;
+  }
+
+  .ipaddress {
+    padding: 10px;
+    margin: auto;
+  }
+
+  .deviceList {
+    padding: 10px;
+    margin: auto;
+  }
+
+  .customName {
+    padding: 10px;
+    margin: auto;
+  }
+
+  .add {
+    padding: 10px;
+    margin: auto;
+  }
