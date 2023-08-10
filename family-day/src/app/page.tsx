@@ -10,6 +10,8 @@ import Homepage from './homepage'
 import { store } from '../store/store'
 import { Provider } from 'react-redux'
 
+// *********** END OF IMPORTS ***********
+
 export default function Home() {
   return (
       <Homepage />

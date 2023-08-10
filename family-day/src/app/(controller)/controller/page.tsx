@@ -14,6 +14,9 @@ Each device module needs to "stream" the data from their respective IP and updat
 
 */
 
+import styles from '../controller.module.css'
+
+
 import { addDevice } from '@/reducers/deviceList'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -22,6 +25,8 @@ import { useSelector } from 'react-redux'
 import ControllerGenerator from '@/app/modules/controller/generator'
 import ControllerLoad from '@/app/modules/controller/load'
 import ControllerStorage from '@/app/modules/controller/storage'
+
+// *********** END OF IMPORTS ***********
 
 export default function Controller() {
   const [active, setActive] = useState(false)
@@ -42,25 +47,33 @@ export default function Controller() {
   // then I will render a text field for the custom text. 
     const Creator = (obj: {active: boolean}) => {
       return (
-        <div className='creator'>
-          <select className='deviceTypes' />
-          <input className='ipaddress' />
-          <select className='deviceList'/>
-          <input className='customName' />
-          <button className='add' />
+        <div className={styles.creator}>
+          <select className={styles.deviceTypes} />
+          <input className={styles.ipaddress} />
+          <select className={styles.deviceList}/>
+          <input className={styles.customName} />
+          <button className={styles.add} />
         </div>
       )
     }
 
     return (
-      <div>
-        <Creator active={active} />
-        <h1> GENERATOR RAAAAH!</h1>
-          <ControllerGenerator />
-        <h1> LOAD RAAAAH!</h1>
-          <ControllerLoad />
-        <h1> STORAGE RAAAAH!</h1>
-          <ControllerStorage />
+      <div className={styles.backdrop}>
+        <div className={styles.controller}>
+          <Creator active={active} />
+          <section className={styles.block}>
+            <h1> GENERATOR RAAAAH!</h1>
+              <ControllerGenerator />
+          </section>
+          <section className={styles.block}>
+            <h1> LOAD RAAAAH!</h1>
+              <ControllerLoad />
+          </section>
+          <section className={styles.block}>
+            <h1> STORAGE RAAAAH!</h1>
+              <ControllerStorage />
+          </section>
+        </div>
       </div>
     )
   }
