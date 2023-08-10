@@ -1,0 +1,56 @@
+Steps to run the website
+Prerequisite: 
+	-- need git
+	-- Need node.js (e.g., from here: https://nodejs.org/en)
+
+# Clone data from github
+C:\Users\rousselr>git clone https://github.com/slacgismo/family-day-website.git
+
+# Then go to directory
+C:\Users\rousselr\family-day-website>cd fam*
+# "Install" the webisite
+C:\Users\rousselr\family-day-website\family-day>npm install
+# Run it (does not update live)
+C:\Users\rousselr\family-day-website\family-day>npm run build
+# Run it with live reloading>
+C:\Users\rousselr\family-day-website\family-day>npm run dev
+
+
+
+About react: I think I need to declare functions before for every thing
+
+
+
+generator.tsx backup
+
+####
+
+"use client"
+
+import { removeDevice } from '@/reducers/deviceList'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { AppDispatch, useAppSelector } from '@/store/store'
+import { useSelector } from 'react-redux'
+
+export default function ControllerGenerator () {
+    return(
+        <div>
+            Your generator controller code goes in this page!!!
+            <label>
+            Watts:
+            <input
+            name="watts"
+            type = "text"
+            value= "16"
+            />
+            </label>
+{/*            <NumericInput
+            	className = "generator"
+            	// value ={600}
+            />*/}
+        </div>
+    )
+}
+
+####
