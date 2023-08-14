@@ -65,7 +65,7 @@ export default function ControllerLoad (props) {
     // }
     return(
         <div id = "xyz" 
-        style = {{width : 200, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #8B0000"}}>
+        style = {{width : 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #8B0000"}}>
             <input name = "title" type = "text" placeholder = "Unnnamed Device" onChange = {event => setDeviceTitle(event.target.value)}/>
             <Switch {...label} defaultchecked color = "success"/>
             <hr />
@@ -74,7 +74,8 @@ export default function ControllerLoad (props) {
             <span> Voltage (Volts): {powerValues.volts}</span>
             <hr />
             <span> Current (Amps): {powerValues.amps}</span>
-           
+            <hr />
+            <button onClick = {removeDevice}> Delete </button>           
 {/*            <NumericInput
                 className = "generator"
                 // value ={600}
