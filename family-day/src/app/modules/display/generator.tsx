@@ -4,9 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { AppDispatch, useAppSelector } from '@/store/store'
 import { useSelector } from 'react-redux'
-
-import solar_panel from "./assets/Solar_panel_under_sun.png"
-import { ReactComponent as battery } from "./assets/battery_charging1.gif"
+import Image from 'next/image'
 
 export default function DisplayGenerator (props) {
     return (
@@ -14,13 +12,7 @@ export default function DisplayGenerator (props) {
             <section>
                 Not really, I just felt like it. 
 
-                 <img src = {solar_panel} alt = " Generating..."/>
-                 <img src = {battery} alt = " Charging..."/>
-                 <img src = {require("./assets/battery_charging1.gif")} alt = " Charging..."/>
-  			<img
-    		alt="Test 4"
-    		src={require('./assets/battery_charging1.gif').default}
-  			></img>
+                 <Image src="/battery_charging1.gif" alt=" Generating..." width="64" height="64" />
 
             </section>
         </>
