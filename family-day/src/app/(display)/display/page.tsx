@@ -12,15 +12,30 @@ The Display page is intended to be a dynamically generated, simple viewing page.
 import DisplayGenerator from '@/app/modules/display/generator'
 import DisplayLoad from '@/app/modules/display/load'
 import DisplayStorage from '@/app/modules/display/storage'
-
+import Image from 'next/image' // RR
 // *********** END OF IMPORTS ***********
 
 export default function Display() {
     return (
       <div className={styles.backdrop}>
-        <DisplayGenerator />
-        <DisplayLoad />
-        <DisplayStorage />
+          <div className={styles.display}>
+          {/*<Creator active={active} />*/}
+          <section className={styles.block}>
+            <h1> GENERATOR -- THE SUN! </h1>
+              <DisplayGenerator />
+
+              {/*<DisplayGenerator props = {{image_path: "https://static.wixstatic.com/media/68532c_db6498551fa04defab60a1e41080154d~mv2.gif"}}/>*/}
+              {/*<DisplayGenerator props = {{image_path: "/Solar_panel_under_sun3.gif"}}/>*/}
+          </section>
+          <section className={styles.block}>
+            <h1> LOAD RAAAAH!</h1>
+              <DisplayLoad />
+          </section>
+          <section className={styles.block}>
+            <h1> STORAGE RAAAAH!</h1>
+              <DisplayStorage />
+          </section>
+        </div>
       </div>
     )
   }
