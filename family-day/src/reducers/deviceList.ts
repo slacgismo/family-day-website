@@ -4,7 +4,7 @@ import type { RootState } from '../store/store'
 // Define a type for the slice state
 interface Devices {
   name: string,
-  ip: number,
+  ip: string,
   watt: number,
   amp: number,
   volt: number,
@@ -26,7 +26,7 @@ export const deviceList = createSlice({
         // Add the device object to the state array
         state.push(action.payload)
       },
-      removeDevice: (state, action: PayloadAction<number>) => {
+      removeDevice: (state, action: PayloadAction<string>) => {
         // Find the index of the device with the matching IP
         const index = state.findIndex(device => device.ip === action.payload)
         

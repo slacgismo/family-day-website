@@ -49,14 +49,22 @@ export default function Controller() {
   });
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-    // State to manage the visibility of sections
-    const [sectionVisibility, setSectionVisibility] = useState<Record<Section, boolean>>({
-      Generator: true,
-      Load: true,
-      Storage: true
-    });
+  // State to manage the visibility of sections
+  const [sectionVisibility, setSectionVisibility] = useState<Record<Section, boolean>>({
+    Generator: true,
+    Load: true,
+    Storage: true
+  });
+
+  const dispatch = useDispatch(); // Add this to get the dispatch function from Redux
+  const devices = useAppSelector(state => state.devices); // Get the devices from the Redux store
 
 // *********** END OF STATES ***********
+
+  // Sort devices by type
+  const generators = devices.filter(device => device.type === 'Generator');
+  const loads = devices.filter(device => device.type === 'Load');
+  const storages = devices.filter(device => device.type === 'Storage');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -97,6 +105,24 @@ export default function Controller() {
 
     if (Object.keys(errors).length === 0) {
       console.log("Saving to State:", formData)
+      let newName: string = ""
+      if (formData.type === "Other") {
+        newName = formData.customName
+      } else {
+        newName = formData.type
+      }
+
+      dispatch(addDevice({
+        name: formData.device,
+        ip: formData.ip,
+        watt: 0, // Default value (populate as needed)
+        amp: 0, // Default value (populate as needed)
+        volt: 0, // Default value (populate as needed)
+        accumulation: 0, // Default value (populate as needed)
+        type: formData.device,
+        poweredOn: false, // Default value (populate as needed)
+      }));
+
       setFormData({
         device: "",
         type: "",
@@ -128,7 +154,7 @@ export default function Controller() {
             <h1>LOAD</h1>
             <button onClick={() => toggleVisibility('Load')}>{sectionVisibility.Load ? "-" : "+"}</button>
           </div>
-          {sectionVisibility.Load && <ControllerLoad />}
+          {sectionVisibility.Load && loads.map(load => <ControllerLoad key={load.ip} device={load} />)}
         </section>
         
         <section className={styles.block}>
@@ -136,7 +162,7 @@ export default function Controller() {
             <h1>GENERATOR</h1>
             <button onClick={() => toggleVisibility('Generator')}>{sectionVisibility.Generator ? "-" : "+"}</button>
           </div>
-          {sectionVisibility.Generator && <ControllerGenerator />}
+          {sectionVisibility.Generator && generators.map(generator => <ControllerGenerator key={generator.ip} device={generator} />)}
         </section>
 
         <section className={styles.block}>
@@ -144,7 +170,7 @@ export default function Controller() {
             <h1>STORAGE</h1>
             <button onClick={() => toggleVisibility('Storage')}>{sectionVisibility.Storage ? "-" : "+"}</button>
           </div>
-          {sectionVisibility.Storage && <ControllerStorage />}
+          {sectionVisibility.Storage && storages.map(storage => <ControllerStorage key={storage.ip} device={storage} />)}
         </section>
       </div>
     </div>
