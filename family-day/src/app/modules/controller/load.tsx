@@ -1,20 +1,3 @@
-// "use client"
-
-// import { removeDevice } from '@/reducers/deviceList'
-// import { useDispatch } from 'react-redux'
-// import { useState } from 'react'
-// import { AppDispatch, useAppSelector } from '@/store/store'
-// import { useSelector } from 'react-redux'
-
-// export default function ControllerLoad () {
-//     return(
-//         <div>
-//             Your load controller code goes in this page!
-//         </div>
-//     )
-// }
-
-
 "use client"
 
 import { removeDevice } from '@/reducers/deviceList'
@@ -44,18 +27,6 @@ export default function ControllerLoad (props) {
         volts: 0
     })
 
-    // constructor() {
-    //  super();
-    //  this.state = {
-    //  };
-    //  this.onInputchange = this.onInputchange.bind(this);
-    // }
-
-    // onInputChange(event) {
-    //  this.setState({
-    //      [event.target.name]: event.target.value
-    //  });
-    // }
 // Then, needs an updater function with periodic refreshing
 
     // let powerValues: { amps: number, watts: number, volts: number} = {
@@ -67,7 +38,7 @@ export default function ControllerLoad (props) {
         <div id = "xyz" 
         style = {{width : 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #8B0000"}}>
             <input name = "title" type = "text" placeholder = "Unnnamed Device" onChange = {event => setDeviceTitle(event.target.value)}/>
-            <Switch {...label} defaultchecked color = "success"/>
+            <Switch {...label} defaultChecked color = "success"/>
             <hr />
             <span> Power (Watts): {powerValues.watts}</span>
             <hr />

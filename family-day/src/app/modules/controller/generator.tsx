@@ -29,18 +29,6 @@ export default function ControllerGenerator (props) {
     	volts: 0
     })
 
-    // constructor() {
-	// 	super();
-	// 	this.state = {
-	// 	};
-	// 	this.onInputchange = this.onInputchange.bind(this);
-	// }
-
-	// onInputChange(event) {
-	// 	this.setState({
-	// 		[event.target.name]: event.target.value
-	// 	});
-	// }
 // Then, needs an updater function with periodic refreshing
 
     // let powerValues: { amps: number, watts: number, volts: number} = {
@@ -52,7 +40,7 @@ export default function ControllerGenerator (props) {
         <div id = "xyz" 
         style = {{width : 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #32CD32"}}>
             <input name = "title" type = "text" placeholder = "Unnnamed Device" onChange = {event => setDeviceTitle(event.target.value)}/>
-            <Switch {...label} defaultchecked color = "success"/>
+            <Switch {...label} defaultChecked color = "success"/>
             <hr />
             <span> Power (Watts): {powerValues.watts}</span>
             <hr />
@@ -62,38 +50,6 @@ export default function ControllerGenerator (props) {
             <hr />
             <button onClick = {removeDevice}> Delete </button>
            
-{/*            <NumericInput
-            	className = "generator"
-            	// value ={600}
-            />*/}
         </div>
     )
 }
-
-// "use client"
-
-// import { removeDevice } from '@/reducers/deviceList'
-// import { useDispatch } from 'react-redux'
-// import { useState } from 'react'
-// import { AppDispatch, useAppSelector } from '@/store/store'
-// import { useSelector } from 'react-redux'
-
-// export default function ControllerGenerator () {
-//     return(
-//         <div>
-//             Your generator controller code goes in this page!!!
-//             <label>
-//             Watts:
-//             <input
-//             name="watts"
-//             type = "text"
-//             value= "16"
-//             />
-//             </label>
-// {/*            <NumericInput
-//             	className = "generator"
-//             	// value ={600}
-//             />*/}
-//         </div>
-//     )
-// }

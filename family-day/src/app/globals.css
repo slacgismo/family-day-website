@@ -29,3 +29,35 @@ body {
 .tomato {
   color: tomato;
 }
+
+.min-w-16 {
+  min-width: 4rem;
+}
+
+.top-el {
+  @apply mt-4 lg:mt-0;
+}
+
+.bot-el {
+  @apply mb-4 lg:mb-0;
+}
+
+.min-h-10 {
+  min-height: 3rem;
+}
+
+.card-standard {
+  @apply flex flex-col items-center justify-center space-x-4 space-y-4 lg:space-y-0 lg:flex-row border-slate-300 box-border shadow-lg border bg-white min-h-10;
+}
+
+.input-standard {
+  @apply rounded border border-black min-w-16 bg-slate-100 disabled:bg-slate-300;
+}
+
+.button-standard {
+  @apply rounded border border-black justify-center bg-slate-100;
+}
+
+.controller-header {
+  @apply flex justify-between items-center;
+}

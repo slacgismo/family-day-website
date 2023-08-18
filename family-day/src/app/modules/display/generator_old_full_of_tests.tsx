@@ -87,7 +87,7 @@ export default function DisplayGenerator (props) {
 //         <div id = "xyz" 
 //         style = {{width : 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #32CD32"}}>
 //             <input name = "title" type = "text" placeholder = "Unnnamed Device" onChange = {event => setDeviceTitle(event.target.value)}/>
-//             <Switch {...label} defaultchecked color = "success"/>
+//             <Switch {...label} defaultChecked color = "success"/>
 //             <hr />
 //             <span> Power (Watts): {powerValues.watts}</span>
 //             <hr />

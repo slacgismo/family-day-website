@@ -9,9 +9,9 @@ The Display page is intended to be a dynamically generated, simple viewing page.
 
 */
 
-import DisplayGenerator from '@/app/modules/display/generator'
-import DisplayLoad from '@/app/modules/display/load'
-import DisplayStorage from '@/app/modules/display/storage'
+import DisplayGenerator from '../../modules/display/generator'
+import DisplayLoad from '../../modules/display/load'
+import DisplayStorage from '../../modules/display/storage'
 import Image from 'next/image' // RR
 // *********** END OF IMPORTS ***********
 

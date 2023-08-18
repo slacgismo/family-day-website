@@ -22,58 +22,129 @@ import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { AppDispatch, useAppSelector } from '@/store/store'
 import { useSelector } from 'react-redux'
-import ControllerGenerator from '@/app/modules/controller/generator'
-import ControllerLoad from '@/app/modules/controller/load'
-import ControllerStorage from '@/app/modules/controller/storage'
+import ControllerGenerator from '../../modules/controller/generator'
+import ControllerLoad from '../../modules/controller/load'
+import ControllerStorage from '../../modules/controller/storage'
+import Creator from './creator'
 
 // *********** END OF IMPORTS ***********
 
+interface FormErrors {
+  device?: string;
+  type?: string;
+  ip?: string;
+  customName?: string;
+}
+
+
 export default function Controller() {
   const [active, setActive] = useState(false)
-  const [deviceSelected, setDeviceSelected] = useState("")
-  const [typeSelected, setTypeSelected] = useState("")
-  const [ip, setIp] = useState("")
+  const [formData, setFormData] = useState({
+    device: "",
+    type: "",
+    ip: "",
+    customName: ""
+  });
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-  useEffect(() => {
-    if (deviceSelected === "other" && !active) {
+    // State to manage the visibility of sections
+    const [sectionVisibility, setSectionVisibility] = useState({
+      Generator: true,
+      Load: true,
+      Storage: true
+    });
+
+// *********** END OF STATES ***********
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "type" && value === "Other") {
       setActive(true);
-    } else if (deviceSelected !== "other" && active) {
+    } else if (name === "type" && value !== "Other" && active) {
       setActive(false);
-    }
-    // No changes if deviceSelected is not "other" and active is already false
-  }, [deviceSelected, active]);
-
-  // one of the select types will include an "other" option. If other is selected,
-  // then I will render a text field for the custom text. 
-    const Creator = (obj: {active: boolean}) => {
-      return (
-        <div className={styles.creator}>
-          <select className={styles.deviceTypes} />
-          <input className={styles.ipaddress} />
-          <select className={styles.deviceList}/>
-          <input className={styles.customName} />
-          <button className={styles.add} />
-        </div>
-      )
+      setFormData(prev => ({ ...prev, customName: "" }));
     }
 
-    return (
-      <div className={styles.backdrop}>
-        <div className={styles.controller}>
-          <Creator active={active} />
-          <section className={styles.block}>
-            <h1> GENERATOR RAAAAH!</h1>
-              <ControllerGenerator />
-          </section>
-          <section className={styles.block}>
-            <h1> LOAD RAAAAH!</h1>
-              <ControllerLoad />
-          </section>
-          <section className={styles.block}>
-            <h1> STORAGE RAAAAH!</h1>
-              <ControllerStorage />
-          </section>
-        </div>
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const validateIP = (ip: string) => {
+    // Use a basic regex pattern for IP validation
+    const pattern = new RegExp(
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+    );
+    return pattern.test(ip);
+  };
+
+  const handleButtonClick = () => {
+    let errors: FormErrors = {};
+
+    if (!formData.device || formData.device === "Select One") {
+      errors.device = "Please select a device.";
+    }
+    if (!formData.type || formData.type === "Select One") {
+      errors.type = "Please select a type.";
+    }
+    if (!validateIP(formData.ip)) {
+      errors.ip = "Invalid IP address.";
+    }
+    if (formData.type === "Other" && !formData.customName) {
+      errors.customName = "Custom name is required.";
+    }
+
+    if (Object.keys(errors).length === 0) {
+      console.log("Saving to State:", formData)
+      setFormData({
+        device: "",
+        type: "",
+        ip: "",
+        customName: ""
+      });
+      setActive(false);
+      setFormErrors({});
+    } else {
+      setFormErrors(errors);
+    }
+  };
+
+  const toggleVisibility = (section: string) => {
+    setSectionVisibility(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  return (
+    <div className={styles.backdrop}>
+      <div className={styles.controller}>
+        <h1>Verify Data</h1>
+        <Creator active={active} formData={formData} formErrors={formErrors} handleInputChange={handleInputChange} handleButtonClick={handleButtonClick} />
+        
+        <section className={styles.block}>
+          <div className="controller-header">
+            <h1>LOAD</h1>
+            <button onClick={() => toggleVisibility('Load')}>{sectionVisibility.Load ? "-" : "+"}</button>
+          </div>
+          {sectionVisibility.Load && <ControllerLoad />}
+        </section>
+        
+        <section className={styles.block}>
+          <div className="controller-header">
+            <h1>GENERATOR</h1>
+            <button onClick={() => toggleVisibility('Generator')}>{sectionVisibility.Generator ? "-" : "+"}</button>
+          </div>
+          {sectionVisibility.Generator && <ControllerGenerator />}
+        </section>
+
+        <section className={styles.block}>
+          <div className="controller-header">
+            <h1>STORAGE</h1>
+            <button onClick={() => toggleVisibility('Storage')}>{sectionVisibility.Storage ? "-" : "+"}</button>
+          </div>
+          {sectionVisibility.Storage && <ControllerStorage />}
+        </section>
       </div>
-    )
-  }
+    </div>
+  )
+}
