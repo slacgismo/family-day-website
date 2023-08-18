@@ -110,10 +110,10 @@ export default function Controller() {
     }
   };
 
-  const toggleVisibility = (section: string) => {
+  const toggleVisibility = (section: Section) => {
     setSectionVisibility(prev => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section as Section]
     }));
   };
 
