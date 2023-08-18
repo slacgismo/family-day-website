@@ -36,6 +36,8 @@ interface FormErrors {
   customName?: string;
 }
 
+type Section = 'Generator' | 'Load' | 'Storage';
+
 
 export default function Controller() {
   const [active, setActive] = useState(false)
@@ -48,7 +50,7 @@ export default function Controller() {
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
     // State to manage the visibility of sections
-    const [sectionVisibility, setSectionVisibility] = useState({
+    const [sectionVisibility, setSectionVisibility] = useState<Record<Section, boolean>>({
       Generator: true,
       Load: true,
       Storage: true
