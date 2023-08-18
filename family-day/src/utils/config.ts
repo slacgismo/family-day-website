@@ -7,7 +7,7 @@ import axios from "axios"
 // Json body example {"id":0,"method":"Switch.Set","params":{"id":0,"on":false}}
 // apower in watts, current in amps, and voltage in volts
 const configUtils = {
-    ipconfig: async (ipaddr: string): Promise<{}> => {
+    ipconfig: async (ipaddr: string): Promise<{ amps: number, watts: number, volts: number }> => {
         let ret: { amps: number, watts: number, volts: number } = {
             amps: 0,
             watts: 0,

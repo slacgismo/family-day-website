@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store/store'
 
 // Define a type for the slice state
-interface Devices {
+export interface Devices {
   name: string,
   ip: string,
   watt: number,

@@ -113,7 +113,7 @@ export default function Controller() {
       }
 
       dispatch(addDevice({
-        name: formData.device,
+        name: newName,
         ip: formData.ip,
         watt: 0, // Default value (populate as needed)
         amp: 0, // Default value (populate as needed)

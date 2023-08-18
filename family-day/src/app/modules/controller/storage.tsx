@@ -1,84 +1,63 @@
 "use client"
 
-import { removeDevice } from '@/reducers/deviceList'
-import { useDispatch } from 'react-redux'
-import { useState } from 'react'
-import { AppDispatch, useAppSelector } from '@/store/store'
-import { useSelector } from 'react-redux'
-// import { useId } from 'react'// RR
-import configUtils from '@/utils/config'
-import Switch from '@mui/material/Switch'
-// configutils.ipconfig(ip-address-here)
-// configutils.powerswitch(boolean)
+import { useEffect, useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import configUtils from '@/utils/config';
+import Switch from '@mui/material/Switch';
+import { removeDevice } from '@/reducers/deviceList';
+import { Devices } from '@/reducers/deviceList';
+import Image from 'next/image';
 
+export default function ControllerStorage({ device }: { device: Devices }) {
+    const dispatch = useDispatch();
 
-export default function ControllerStorage (props) {
-    /* commented until i actuall pass ipaddress in props. -DR
-    const defaults: { ipaddress: string} = {
-        ipaddress: props.ipaddress
-    }
-    */
-    const label = { inputProps: {} }
-    const [deviceTitle, setDeviceTitle] = useState(0)
-    const [deviceState, setDeviceState] = useState(0)
+    const [deviceTitle, setDeviceTitle] = useState(device.name || "Unnamed Device");
     const [powerValues, setPowerValues] = useState({
-        amps: 0,
-        watts: 0,
-        volts: 0
-    })
+        amps: device.amp || 0,
+        watts: device.watt || 0,
+        volts: device.volt || 0
+    });
+    const [isPoweredOn, setPoweredOn] = useState(device.poweredOn || false);
 
-// Then, needs an updater function with periodic refreshing
+    const fetchPowerValues = useCallback(async () => {
+        const data = await configUtils.ipconfig(device.ip);
+        setPowerValues(data);
+    }, [device.ip]);
 
-    // let powerValues: { amps: number, watts: number, volts: number} = {
-    //  amps: 0,
-    //  watts: 0,
-    //  volts: 0
-    // }
-    return(
-        <div id = "xyz" 
-        style = {{width : 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #0000FF"}}>
-            <input name = "title" type = "text" placeholder = "Unnnamed Device" onChange = {event => setDeviceTitle(event.target.value)}/>
-            <Switch {...label} defaultChecked color = "success"/>
-            <hr />
-            <span> Power (Watts): {powerValues.watts}</span>
-            <hr />
-            <span> Voltage (Volts): {powerValues.volts}</span>
-            <hr />
-            <span> Current (Amps): {powerValues.amps}</span>
-            <hr />
-            <button onClick = {removeDevice}> Delete </button>           
-{/*            <NumericInput
-                className = "generator"
-                // value ={600}
-            />*/}
+    useEffect(() => {
+        // Fetch initial data
+        fetchPowerValues();
+
+        // Set the interval based on the power state
+        const intervalDuration = isPoweredOn ? 1000 : 60000;
+        const interval = setInterval(fetchPowerValues, intervalDuration);
+
+        // Clear the interval when the component is unmounted or when the power state changes
+        return () => clearInterval(interval);
+    }, [device.ip, isPoweredOn, fetchPowerValues]);
+
+    const handleSwitchChange = async (e: { target: { checked: any; }; }) => {
+        const newState = e.target.checked;
+        setPoweredOn(newState);
+        await configUtils.powerswitch(device.ip, newState);
+    };
+
+    const handleRemoveDevice = () => {
+        dispatch(removeDevice(device.ip));
+    };
+
+    return (
+        <div className="card-standard" style={{ width: 300, padding: "30px", fontFamily: "Verdana", boxShadow: "0 0 3px 2px #0000FF" }}>
+            <div className="controller-header">
+                <h1>{deviceTitle}</h1>
+                <Switch checked={isPoweredOn} onChange={handleSwitchChange} color="success" />
+            </div>
+            <span>Power (Watts): {powerValues.watts}</span>
+            <span>Voltage (Volts): {powerValues.volts}</span>
+            <span>Current (Amps): {powerValues.amps}</span>
+            <button onClick={handleRemoveDevice}>
+                <Image src="/trashcan.svg" alt="Delete" width="20" height="20" />
+            </button>
         </div>
-    )
+    );
 }
-
-// "use client"
-
-// import { removeDevice } from '@/reducers/deviceList'
-// import { useDispatch } from 'react-redux'
-// import { useState } from 'react'
-// import { AppDispatch, useAppSelector } from '@/store/store'
-// import { useSelector } from 'react-redux'
-
-// export default function ControllerGenerator () {
-//     return(
-//         <div>
-//             Your generator controller code goes in this page!!!
-//             <label>
-//             Watts:
-//             <input
-//             name="watts"
-//             type = "text"
-//             value= "16"
-//             />
-//             </label>
-// {/*            <NumericInput
-//              className = "generator"
-//              // value ={600}
-//             />*/}
-//         </div>
-//     )
-// }
