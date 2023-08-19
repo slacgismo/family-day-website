@@ -52,9 +52,9 @@ export default function ControllerStorage({ device }: { device: Devices }) {
                 <h1>{deviceTitle}</h1>
                 <Switch checked={isPoweredOn} onChange={handleSwitchChange} color="success" />
             </div>
-            <span>Power (Watts): {powerValues.watts}</span>
-            <span>Voltage (Volts): {powerValues.volts}</span>
-            <span>Current (Amps): {powerValues.amps}</span>
+            <span>Watts: {powerValues.watts}</span>
+            <span>Volts: {powerValues.volts}</span>
+            <span>Amps: {powerValues.amps}</span>
             <button onClick={handleRemoveDevice}>
                 <Image src="/trashcan.svg" alt="Delete" width="20" height="20" />
             </button>

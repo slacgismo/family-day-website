@@ -34,6 +34,10 @@ body {
   min-width: 4rem;
 }
 
+.min-w-24 {
+  min-width: 6rem;
+}
+
 .top-el {
   @apply mt-4 lg:mt-0;
 }
@@ -46,7 +50,15 @@ body {
   min-height: 3rem;
 }
 
+.min-h-4 {
+  min-height: 1rem;
+}
+
 .card-standard {
+  @apply flex flex-col items-center justify-center space-x-4 space-y-4 lg:space-y-0 lg:flex-row border-slate-300 box-border shadow-lg border bg-white min-h-10;
+}
+
+.card-module {
   @apply flex flex-col items-center justify-center space-x-4 space-y-4 lg:space-y-0 lg:flex-row border-slate-300 box-border shadow-lg border bg-white min-h-10;
 }
 
@@ -60,4 +72,12 @@ body {
 
 .controller-header {
   @apply flex justify-between items-center;
+}
+
+.controller-values {
+  @apply flex justify-between items-center flex-col lg:flex-row mr-4;
+}
+
+.power-values {
+  @apply rounded border border-black min-w-16 bg-slate-100 min-h-4 items-center;
 }
