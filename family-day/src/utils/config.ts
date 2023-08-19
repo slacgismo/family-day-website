@@ -12,15 +12,15 @@ const configUtils = {
             amps: 0,
             watts: 0,
             volts: 0
-        }
+        };
         
         try {
-            const res = await axios.get(`http://${ipaddr}/rpc/Switch.GetStatus?id=0`);
+            const res = await axios.post(`/api/shellydata`, { ipaddr });
             ret = {
-                amps: res.data.current, 
-                watts: res.data.apower, 
-                volts: res.data.voltage
-            }
+                amps: res.data.amps, 
+                watts: res.data.watts, 
+                volts: res.data.volts
+            };
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -29,23 +29,17 @@ const configUtils = {
     },
 
     powerswitch: async (ipaddr: string, status: boolean) => {
-        const jbody = {
-            "id":0,
-            "method":"Switch.Set",
-            "params":{
-                "id":0,
-                "on":status}
-            }
-
-        const res = await axios.post(`http://${ipaddr}/rpc`, jbody)
-            .then(res => { if(res.data.result.was_on === !status) {
+        try {
+            const res = await axios.post(`/api/powerswitch`, { ipaddr, status });
+            if (res.data.status) {
                 return status;
-            } 
-        })
-            .catch(err => {
-                console.error(err)
-                return err;
-            })
+            } else {
+                throw new Error(res.data.error || "Unknown error");
+            }
+        } catch (err) {
+            console.error(err);
+            return err;
+        }
     }
 }
 export default configUtils;
